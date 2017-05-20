@@ -4,7 +4,7 @@ A little program to automate Wake on LAN and [Parsec](https://parsec.tv/) client
 
 ## Downloads
 
-[Parsec Shortcut](build/Parsec Shortcut.exe)
+[Parsec Shortcut](build/Parsec%20Shortcut.exe)
 
 [Opener](build/Opener.exe)
 
