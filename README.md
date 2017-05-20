@@ -1,3 +1,4 @@
+
 ## Synopsis
 
 A little program to automate Wake on LAN and [Parsec](https://parsec.tv/) client connection.
@@ -31,11 +32,15 @@ Open programs in a Parsec server. Needs ParsecShortcut to work.
 ## Installation
 
 Just create a shortcur to the exe and add the argument "-open" followed by the command that you want to sent to the opener program.
+
 Run the opener program in the server with Parsec.
-You need to disable the login screen in the server (Parsec can't control this screen for now)
+
+You need to disable the login screen in the server (Parsec can't control this screen for now).
 
 ## Thanks
 
 [Parsec.tv](http://Parsec.tv/) is a remote control program for gamers.
+
 This program is written in [Autoit v3](https://www.autoitscript.com/).
-The loading bar was coded by UEZ of the [Autoit forum](https://www.autoitscript.com/forum/topic/150545-gdi-animated-loading-screens-build-2014-06-20-32-examples/) with an idea taken from [alessioatzeni.com](http://www.alessioatzeni.com/wp-content/tutorials/html-css/CSS3-Loading-Animation/index.html)
+
+The loading bar was coded by UEZ of the [Autoit forum](https://www.autoitscript.com/forum/topic/150545-gdi-animated-loading-screens-build-2014-06-20-32-examples/) with an idea taken from [alessioatzeni.com](http://www.alessioatzeni.com/wp-content/tutorials/html-css/CSS3-Loading-Animation/index.html).
