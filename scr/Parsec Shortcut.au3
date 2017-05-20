@@ -54,6 +54,8 @@ If IniRead($sConfigFile, "Parsec", "User", "ERROR" & $iRandom & "ERROR") = "ERRO
 		IniWrite($sConfigFile, "Parsec", "Password", $bEncrypted) ;Write encrypted password to config file
 	EndIf
 EndIf
+;Change MAC address format
+$sServerMAC = StringReplace(StringReplace($sServerMAC,"-",""),":","")
 ;Always store last server info in config file
 IniWrite($sConfigFile, "Server", "Name", $sServerName)
 IniWrite($sConfigFile, "Server", "MAC", $sServerMAC)
