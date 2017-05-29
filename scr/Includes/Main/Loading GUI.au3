@@ -4,7 +4,7 @@
 #include <Memory.au3>
 #include <GDIPlus.au3>
 #include <WindowsConstants.au3>
-Global $abErrors[5]
+Global $abErrors
 Func _GDIPlus_IncreasingBalls($iW, $iH, $iPerc, $sString = "Please wait...", $iRadius = 12, $iBalls = 5, $bHBitmap = True)
 	Local Const $iDiameter = $iRadius * 2
 
@@ -22,6 +22,7 @@ Func _GDIPlus_IncreasingBalls($iW, $iH, $iPerc, $sString = "Please wait...", $iR
 	$hBrushBall2Error = $hBrushBall2Error[6]
 
 	Local $hBitmap = _GDIPlus_BitmapCreateFromScan0($iW, $iH)
+
 
 	Local Const $hCtxt = _GDIPlus_ImageGetGraphicsContext($hBitmap)
 	_GDIPlus_GraphicsSetSmoothingMode($hCtxt, 2)

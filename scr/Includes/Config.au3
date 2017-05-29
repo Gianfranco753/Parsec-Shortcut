@@ -1,6 +1,10 @@
+#pragma compile(inputboxres, true)
 #include-once
 #include <Crypt.au3>
-$iProtocolVersion = 2
+$sConfigDir = @AppDataCommonDir & "\ParsecShortcut"
+DirCreate($sConfigDir)
+FileChangeDir($sConfigDir)
+$iProtocolVersion = 3
 ;Read the config, first search the arguments, then the config file and last ask the user
 Global $g_hKey, $aCmdLine = []
 Func _ReadConfig($sConfigFile, $sSection, $sKey, $sMessage, $sPattern = "(.*)", $sErrorMessage = "There was an error on the input, please try again.", $sDefault = "", $bIsPass = False, $bAskUser = True)
@@ -14,7 +18,9 @@ Func _ReadConfig($sConfigFile, $sSection, $sKey, $sMessage, $sPattern = "(.*)", 
 	If $sReturn = '' Then ;If the param isn't in the arguments, read the config file
 		;Read the config file (a random is used because some user could choose "ERROR" as his password o computer name)
 		$iRandom = Random(10000, 99999, 1)
+		FileChangeDir($sConfigDir&"\Servers")
 		$sReturn = IniRead($sConfigFile, $sSection, $sKey, "ERROR" & $iRandom & "ERROR")
+		FileChangeDir($sConfigDir)
 		;If can´t find the key in Config.ini (file not exist or key doesn't exist) ask the user for the data
 		If $sReturn = "ERROR" & $iRandom & "ERROR" Then
 			If $bAskUser Then
@@ -67,6 +73,7 @@ Func _RequestServerList($cookies)
 	$oHTTP.SetRequestHeader("Cookie", $cookies)
 	$oHTTP.Send()
 	$sResponse = $oHTTP.ResponseText
+	ConsoleWrite($sResponse&@CRLF)
 	Return $sResponse
 EndFunc   ;==>_RequestServerList
 Func _AnalyzeServerList($serversInfo, $sServerName)

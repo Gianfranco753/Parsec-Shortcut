@@ -6,16 +6,18 @@
 #include <GDIPlus.au3>
 #include <WindowsConstants.au3>
 
-#include "Includes\Loading GUI.au3"
+#include "Loading GUI.au3"
 AutoItSetOption("GUIOnEventMode", 1)
 
+Global Const $iMaxBalls = 6
+Global $iPerc = 0, $iMaxPerc = 0, $iMinPerc = 0, $iBall = 1, $sLoadingText = "Loading..."
+Global $abErrors[$iMaxBalls]
 Global Const $hDwmApiDll = DllOpen("dwmapi.dll")
 Global $sChkAero = DllStructCreate("int;")
 DllCall($hDwmApiDll, "int", "DwmIsCompositionEnabled", "ptr", DllStructGetPtr($sChkAero))
 Global $bAero = DllStructGetData($sChkAero, 1)
 Global $fStep = 0.02
 If Not $bAero Then $fStep = 1.25
-Global $iPerc, $sLoadingText, $abErrors[5]
 
 _GDIPlus_Startup()
 Global Const $STM_SETIMAGE = 0x0172 ; $IMAGE_BITMAP = 0
@@ -39,13 +41,13 @@ Next
 
 Func PlayAnim()
 	;$hHBmp_BG = _GDIPlus_IncreasingBalls($iW, $iH, $iPerc, $sLoadingText & "   " & StringFormat("%05.2f %", Min($iPerc, 100)))
-	$hHBmp_BG = _GDIPlus_IncreasingBalls($iW, $iH, $iPerc, $sLoadingText)
+	$hHBmp_BG = _GDIPlus_IncreasingBalls($iW, $iH, $iPerc, $sLoadingText, 12, $iMaxBalls)
 	$hB = GUICtrlSendMsg($iPic, $STM_SETIMAGE, $IMAGE_BITMAP, $hHBmp_BG)
 	If $hB Then _WinAPI_DeleteObject($hB)
 	_WinAPI_DeleteObject($hHBmp_BG)
 	;If $iPerc > 110 Then $iPerc = 0
 EndFunc   ;==>PlayAnim
-Func _addBallError($iBall)
+Func _addBallError()
 	PlayAnim()
 	$abErrors[$iBall-1] = True
 EndFunc
@@ -56,11 +58,16 @@ Func Close()
 	GUIDelete()
 	Exit
 EndFunc   ;==>Close
-Global $iPerc = 0, $iMaxPerc = 0, $iMinPerc = 0, $sLoadingText = "Loading..."
-Func _MaxMinPerc($iNewPerc, $sNewText)
-	$iPerc = $iMaxPerc
-	$iMinPerc = $iMaxPerc
-	$iMaxPerc = $iNewPerc
+Func _MaxMinPerc($iNewBall, $sNewText)
+	$iBall = $iNewBall
+	$iPerc = ($iBall-1)*(100/$iMaxBalls)
+	$iMinPerc = ($iBall-1)*(100/$iMaxBalls)
+	$iMaxPerc = ($iBall)*(100/$iMaxBalls)
 	$sLoadingText = $sNewText
-	Sleep(100)
+	Sleep(200) ;For the animation
+EndFunc
+Func _SetBallPerc($iNewPerc)
+	If $iNewPerc > 100 Then $iNewPerc = 100
+	$iPerc = (($iBall-1)+($iNewPerc/100))*(100/$iMaxBalls)
+	PlayAnim()
 EndFunc

@@ -44,3 +44,7 @@ You need to disable the login screen in the server (Parsec can't control this sc
 This program is written in [Autoit v3](https://www.autoitscript.com/).
 
 The loading bar was coded by UEZ of the [Autoit forum](https://www.autoitscript.com/forum/topic/150545-gdi-animated-loading-screens-build-2014-06-20-32-examples/) with an idea taken from [alessioatzeni.com](http://www.alessioatzeni.com/wp-content/tutorials/html-css/CSS3-Loading-Animation/index.html).
+
+[FreeRDP](http://www.freerdp.com/) is used for the RDP conecction.
+
+Service [SessionChange](https://www.autoitscript.com/forum/topic/80201-_service_udf-v4-build-your-own-service-with-autoit-code/) from an example in the [Autoit forums](https://www.autoitscript.com/forum/topic/80201-_service_udf-v4-build-your-own-service-with-autoit-code/)
