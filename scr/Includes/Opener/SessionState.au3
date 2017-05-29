@@ -34,12 +34,16 @@ Func _WM_WTSSESSION_CHANGE($hWnd, $iMsgID, $wParam, $lParam)
     Switch $wParam
         Case $WTS_CONSOLE_CONNECT
             ;$sMsg &= "A session was connected to the console terminal."
+			$bIsLocked = True
         Case $WTS_CONSOLE_DISCONNECT
             ;$sMsg &= "A session was disconnected from the console terminal."
+			$bIsLocked = True
         Case $WTS_REMOTE_CONNECT
             ;$sMsg &= "A session was connected to the remote terminal."
+			$bIsLocked = True
         Case $WTS_REMOTE_DISCONNECT
             ;$sMsg &= "A session was disconnected from the remote terminal."
+			$bIsLocked = True
         Case $WTS_SESSION_LOGON
             ;$sMsg &= "A user has logged on to the session."
 			$bIsLocked = False
